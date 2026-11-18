@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Noite de Jogos: descubra o jogo perfeito para a sua galera, filtrado por número de pessoas, tipo e nível de caos.">
+  <title>Noite de Jogos 🎲 | Qual jogo vai acabar com a sua amizade hoje?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Link de pular conteúdo (WCAG 2.4.1 – Bypass Blocks) -->
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===================== CABEÇALHO ===================== -->
+  <header class="cabecalho">
+    <div class="container cabecalho__inner">
+      <a href="#" class="logo" aria-label="Noite de Jogos, página inicial">
+        <img src="img/logo.svg" alt="" width="40" height="40">
+        <span>Noite de Jogos</span>
+      </a>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="menu-principal">
+        <span class="menu-toggle__barra" aria-hidden="true"></span>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+
+      <nav id="menu-principal" class="menu" aria-label="Menu principal">
+        <ul>
+          <li><a href="#jogos">Jogos</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#regras">Regras de ouro</a></li>
+          <li><a href="#contato" class="botao botao--amarelo">Indique um jogo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" aria-labelledby="hero-titulo">
+      <div class="container hero__inner">
+        <div class="hero__texto">
+          <p class="etiqueta">🎉 Sextou, chama a galera</p>
+          <h1 id="hero-titulo">Qual jogo vai <span class="destaque">acabar com a sua amizade</span> hoje?</h1>
+          <p class="hero__sub">Diga quantas pessoas vão jogar e quanto caos vocês aguentam. A gente acha o jogo certo para a noite (e não se responsabiliza pelas brigas).</p>
+          <div class="hero__acoes">
+            <a href="#jogos" class="botao botao--amarelo">Achar meu jogo</a>
+            <a href="#como-funciona" class="botao botao--contorno">Como funciona?</a>
+          </div>
+          <ul class="hero__numeros" aria-label="Números do site">
+            <li><strong data-contador="jogos">0</strong> jogos no acervo</li>
+            <li><strong>5</strong> níveis de caos</li>
+            <li><strong>∞</strong> amizades em risco</li>
+          </ul>
+        </div>
+        <img class="hero__img" src="img/hero.svg" alt="Ilustração de dados, cartas e peões espalhados sobre uma mesa" width="480" height="400">
+      </div>
+    </section>
+
+    <!-- ===================== CATÁLOGO + ABAS DE PESQUISA ===================== -->
+    <section id="jogos" class="secao" aria-labelledby="jogos-titulo">
+      <div class="container">
+        <h2 id="jogos-titulo" class="secao__titulo">Encontre o jogo da noite</h2>
+        <p class="secao__sub">Use as abas para escolher o tamanho da galera e refine pela busca ou pelo tipo de jogo.</p>
+
+        <!-- Abas (padrão WAI-ARIA Tabs) -->
+        <div class="abas" role="tablist" aria-label="Quantas pessoas vão jogar?">
+          <button role="tab" id="aba-todos" aria-selected="true" aria-controls="lista-jogos" data-filtro="todos">🎲 Todos</button>
+          <button role="tab" id="aba-dupla" aria-selected="false" aria-controls="lista-jogos" data-filtro="dupla" tabindex="-1">💑 Dupla (2)</button>
+          <button role="tab" id="aba-turma" aria-selected="false" aria-controls="lista-jogos" data-filtro="turma" tabindex="-1">👯 Turma (3 a 5)</button>
+          <button role="tab" id="aba-galera" aria-selected="false" aria-controls="lista-jogos" data-filtro="galera" tabindex="-1">🎊 Galera (6+)</button>
+        </div>
+
+        <!-- Barra de pesquisa -->
+        <form class="busca" role="search" aria-label="Pesquisar jogos" onsubmit="return false;">
+          <div class="campo campo--busca">
+            <label for="busca-texto">Buscar pelo nome</label>
+            <input type="search" id="busca-texto" placeholder="Ex.: Uno, mímica, truco…" autocomplete="off">
+          </div>
+          <div class="campo">
+            <label for="busca-tipo">Tipo de jogo</label>
+            <select id="busca-tipo">
+              <option value="todos">Todos os tipos</option>
+              <option value="cartas">Cartas</option>
+              <option value="tabuleiro">Tabuleiro</option>
+              <option value="festa">Festa</option>
+              <option value="palavras">Palavras</option>
+            </select>
+          </div>
+          <div class="campo campo--check">
+            <input type="checkbox" id="busca-caos">
+            <label for="busca-caos">🔥 Só os que acabam com amizade</label>
+          </div>
+        </form>
+
+        <!-- Resultado anunciado para leitores de tela (WCAG 4.1.3 – Status Messages) -->
+        <p id="resultado-busca" class="resultado" role="status" aria-live="polite"></p>
+
+        <div id="lista-jogos" class="grade-jogos" role="tabpanel" aria-labelledby="aba-todos">
+          <!-- Cartões gerados por js/script.js -->
+        </div>
+
+        <div id="vazio" class="vazio" hidden>
+          <img src="img/vazio.svg" alt="" width="140" height="140">
+          <p><strong>Nenhum jogo encontrado.</strong> Tenta outro filtro ou indica um jogo para a gente!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CARTÕES EXPLICATIVOS ===================== -->
+    <section id="como-funciona" class="secao secao--azul" aria-labelledby="como-titulo">
+      <div class="container">
+        <h2 id="como-titulo" class="secao__titulo">Como funciona o medidor de caos?</h2>
+        <p class="secao__sub">Cada jogo recebe uma nota de 1 a 5 dados. Quanto mais dados, mais gritaria.</p>
+
+        <div class="grade-explica">
+          <article class="explica">
+            <span class="explica__icone" aria-hidden="true">😌</span>
+            <h3>Caos 1–2 · Paz e amor</h3>
+            <p>Jogos tranquilos, ótimos para o date ou para quem acabou de conhecer a galera. Ninguém sai magoado.</p>
+          </article>
+          <article class="explica">
+            <span class="explica__icone" aria-hidden="true">😅</span>
+            <h3>Caos 3 · Tá esquentando</h3>
+            <p>Começam as acusações de roubo e os "não valeu!". Ideal para turmas que já se conhecem.</p>
+          </article>
+          <article class="explica">
+            <span class="explica__icone" aria-hidden="true">😤</span>
+            <h3>Caos 4 · Grito garantido</h3>
+            <p>Vizinho vai reclamar. Recomendado só com bebida, petisco e paciência à vontade.</p>
+          </article>
+          <article class="explica explica--perigo">
+            <span class="explica__icone" aria-hidden="true">🔥</span>
+            <h3>Caos 5 · Acaba com amizade</h3>
+            <p>Traição, blefe e rancor eterno. Jogue por sua conta e risco. Não aceitamos reclamações.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REGRAS DE OURO (cartões explicativos) ===================== -->
+    <section id="regras" class="secao" aria-labelledby="regras-titulo">
+      <div class="container">
+        <h2 id="regras-titulo" class="secao__titulo">Regras de ouro da noite de jogos</h2>
+        <ol class="grade-regras">
+          <li class="regra">
+            <img src="img/regra-petisco.svg" alt="" width="72" height="72">
+            <h3>Petisco não é opcional</h3>
+            <p>Barriga vazia gera mau humor. Mau humor gera virada de mesa.</p>
+          </li>
+          <li class="regra">
+            <img src="img/regra-livro.svg" alt="" width="72" height="72">
+            <h3>Leia as regras ANTES</h3>
+            <p>Nada pior que descobrir a regra que muda tudo na última rodada.</p>
+          </li>
+          <li class="regra">
+            <img src="img/regra-relogio.svg" alt="" width="72" height="72">
+            <h3>Comece pelo mais leve</h3>
+            <p>Esquente a galera com um caos 2 antes de partir para o Lobisomem.</p>
+          </li>
+          <li class="regra">
+            <img src="img/regra-abraco.svg" alt="" width="72" height="72">
+            <h3>O que acontece na mesa…</h3>
+            <p>…fica na mesa. Abraço obrigatório no final, independente do placar.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== CONTATO / FORMULÁRIO ===================== -->
+    <section id="contato" class="secao secao--amarelo" aria-labelledby="contato-titulo">
+      <div class="container contato">
+        <div class="contato__texto">
+          <h2 id="contato-titulo" class="secao__titulo">Indique um jogo (ou mande um recado)</h2>
+          <p>Conhece um jogo que merece estar aqui? Tem uma história de amizade destruída para contar? Manda pra gente!</p>
+          <img src="img/contato.svg" alt="Ilustração de um envelope com um dado saindo de dentro" width="260" height="200">
+        </div>
+
+        <form id="form-contato" class="formulario" novalidate>
+          <p class="formulario__aviso">Campos com <span aria-hidden="true">*</span><span class="sr-only">asterisco</span> são obrigatórios.</p>
+
+          <div class="campo">
+            <label for="nome">Seu nome <span aria-hidden="true">*</span></label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required aria-describedby="erro-nome">
+            <p class="campo__erro" id="erro-nome"></p>
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="erro-email">
+            <p class="campo__erro" id="erro-email"></p>
+          </div>
+
+          <div class="campo">
+            <label for="assunto">Assunto <span aria-hidden="true">*</span></label>
+            <select id="assunto" name="assunto" required aria-describedby="erro-assunto">
+              <option value="">Selecione…</option>
+              <option value="indicacao">Quero indicar um jogo</option>
+              <option value="historia">Tenho uma história de caos</option>
+              <option value="sugestao">Sugestão para o site</option>
+              <option value="outro">Outro assunto</option>
+            </select>
+            <p class="campo__erro" id="erro-assunto"></p>
+          </div>
+
+          <fieldset class="campo campo--radios">
+            <legend>Nível de caos do jogo (se for indicação)</legend>
+            <div class="radios">
+              <label><input type="radio" name="caos" value="1"> 😌 1</label>
+              <label><input type="radio" name="caos" value="2"> 🙂 2</label>
+              <label><input type="radio" name="caos" value="3"> 😅 3</label>
+              <label><input type="radio" name="caos" value="4"> 😤 4</label>
+              <label><input type="radio" name="caos" value="5"> 🔥 5</label>
+            </div>
+          </fieldset>
+
+          <div class="campo">
+            <label for="mensagem">Mensagem <span aria-hidden="true">*</span></label>
+            <textarea id="mensagem" name="mensagem" rows="5" required minlength="10" aria-describedby="dica-mensagem erro-mensagem"></textarea>
+            <p class="campo__dica" id="dica-mensagem">Mínimo de 10 caracteres.</p>
+            <p class="campo__erro" id="erro-mensagem"></p>
+          </div>
+
+          <button type="submit" class="botao botao--azul botao--largo">Enviar 🎲</button>
+          <p id="form-status" class="formulario__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <footer class="rodape">
+    <div class="container rodape__grade">
+      <div>
+        <a href="#" class="logo logo--rodape" aria-label="Noite de Jogos, voltar ao topo">
+          <img src="img/logo.svg" alt="" width="36" height="36">
+          <span>Noite de Jogos</span>
+        </a>
+        <p>Feito com 🎲 e muita discussão sobre regras.</p>
+      </div>
+      <nav aria-label="Links do rodapé">
+        <h2 class="rodape__titulo">Navegue</h2>
+        <ul>
+          <li><a href="#jogos">Jogos</a></li>
+          <li><a href="#como-funciona">Medidor de caos</a></li>
+          <li><a href="#regras">Regras de ouro</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="rodape__titulo">Sobre o projeto</h2>
+        <p>Projeto Final de Desenvolvimento de Interfaces, CEUB, 2º semestre de 2026.</p>
+      </div>
+    </div>
+    <p class="rodape__copy">© <span id="ano">2026</span> Noite de Jogos · Nenhuma amizade foi ferida na criação deste site (talvez uma).</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
