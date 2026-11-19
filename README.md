@@ -25,6 +25,19 @@ Prof. Dr. Felipe Batista da Silva.
 | Carrossel de imagens | ⏳ entrega final |
 | Aba de acessibilidade (fontes maiores etc.) | ⏳ entrega final |
 | Modo escuro/claro | ⏳ entrega final (as cores já estão em variáveis CSS) |
+| Framework CSS (Bootstrap 5.3) | ⏳ entrega final |
+
+### 🔜 Plano para a entrega final: Bootstrap
+Na parcial, o site foi escrito todo com código próprio, para mostrar os fundamentos (Grid, Flexbox, variáveis CSS e DOM). Na entrega final, o **Bootstrap 5.3** será integrado para os componentes mais complexos:
+
+| Item | Recurso do Bootstrap |
+|---|---|
+| Carrossel de imagens | `carousel` |
+| Página de login | `modal` + estilos de formulário |
+| Modo escuro/claro | `data-bs-theme="dark"` |
+| Aba de acessibilidade | `offcanvas` (painel lateral) |
+
+As cores do Bootstrap (`--bs-primary` e outras) serão substituídas pela paleta do site, e o contraste será verificado novamente.
 
 ---
 
@@ -142,7 +155,8 @@ Os dois últimos casos mostram **por que** o amarelo nunca é usado como texto s
 ---
 
 ## 🧰 Ferramentas e tecnologias
-- HTML5, CSS3 e JavaScript puro (sem frameworks)
+- HTML5, CSS3 e JavaScript com código próprio (entrega parcial)
+- Bootstrap 5.3 (planejado para a entrega final)
 - Google Fonts: **Baloo 2** (títulos) e **Nunito** (texto)
 - Ilustrações em SVG feitas à mão para o projeto
 - VS Code, Git e GitHub, GitHub Pages
